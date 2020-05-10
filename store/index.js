@@ -92,10 +92,13 @@ export const getters = {
   },
   dischargeRateGraphData: (state, getters) => {
     return {
-      labels: ['累積感染者数', '累積退院者'],
+      labels: ['現在感染者数', '累積退院者'],
       datasets: [
         {
-          data: [getters.patientsData.npatients, getters.patientsData.nexits],
+          data: [
+            getters.patientsData.ncurrentpatients,
+            getters.patientsData.nexits
+          ],
           backgroundColor: ['#d63031', '#3498db'],
           borderColor: 'transparent'
         }
