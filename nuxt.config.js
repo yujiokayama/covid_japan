@@ -38,12 +38,16 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
-  ],
+
+  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources', ['nuxt-webfontloader']],
+  webfontloader: {
+    google: {
+      families: ['Noto+Sans+JP:400,500,700,900']
+    }
+  },
   /*
    ** Axios module configuration
+   ** Doc: https://axios.nuxtjs.org/usage
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},

@@ -1,68 +1,146 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        covid_saitama
-      </h1>
-      <h2 class="subtitle">
-        埼玉県の新型コロナ情報取得
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+    <h1 class="title-main">埼玉県新型コロナ情報</h1>
+    <p class="text-last-update">最終更新日: {{ dateToJapanese }}</p>
+    <section>
+      <div class="grid">
+        <div>
+          <dl>
+            <dt>累積感染者数</dt>
+            <dd>{{ patientsData.npatients }}</dd>
+            <dt>現在感染者数</dt>
+            <dd>{{ patientsData.ncurrentpatients }}</dd>
+            <dt>累積退院者</dt>
+            <dd>{{ patientsData.nexits }}</dd>
+            <dt>累積死者</dt>
+            <dd>{{ patientsData.ndeaths }}</dd>
+          </dl>
+        </div>
+        <div>
+          <p class="text-bed-userate">
+            病床使用率: <span>{{ bedUseRate }} </span>%
+          </p>
+          <CircleGraph :datas="circleGraphDatas" />
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import { mapGetters } from 'vuex'
+import CircleGraph from '~/components/CircleGraph'
 
 export default {
   components: {
-    Logo
+    CircleGraph
+  },
+  data() {
+    return {
+      rate: false
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'patientsData',
+      'getHospitalBedData',
+      'bedUseRate',
+      'dateToJapanese',
+      'circleGraphDatas',
+      'circleGraphOptions'
+    ])
+  },
+  async fetch({ store }) {
+    await store.dispatch('getPatientsData')
+    await store.dispatch('getHospitalBedData')
+  },
+  mounted() {
+    this.rate = true
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+$tab: 560px;
+$pc: 960px;
+
+@mixin tab {
+  @media (min-width: ($tab)) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+
 .container {
+  width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  padding: 0 1em;
+  @include tab {
+    padding: 0 1.8rem;
+  }
+  @include pc {
+    max-width: 1240px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  // grid-auto-rows: 1fr;
+  grid-gap: 1.5rem;
+  padding: 1rem;
+  margin: 0 0 0.5rem;
+  & > div {
+    background: white;
+    overflow: auto;
+    min-width: 0;
+    padding: 1rem;
+  }
+}
+.title-main {
+  margin: 10px 0;
+  text-align: center;
+  font-weight: normal;
+}
+.text-last-update {
   text-align: center;
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.text-bed-userate {
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+  text-align: center;
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+dl {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+  border-top: none;
 }
-
-.links {
-  padding-top: 15px;
+dt {
+  background: #ddd;
+  width: 30%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #ccc;
+}
+dd {
+  padding: 10px;
+  margin: 0;
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  width: 70%;
+  background: #fff;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 320px) {
+  dl {
+    flex-flow: column nowrap;
+  }
 }
 </style>
