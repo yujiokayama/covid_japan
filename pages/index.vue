@@ -16,11 +16,19 @@
             <dd>{{ patientsData.ndeaths }}人</dd>
           </dl>
         </div>
+      </div>
+      <div class="grid">
+        <div>
+          <p class="text-bed-userate">
+            退院率: <span>{{ dischargeRate }} </span>%
+          </p>
+          <CircleGraph :datas="dischargeRateGraphData" />
+        </div>
         <div>
           <p class="text-bed-userate">
             病床使用率: <span>{{ bedUseRate }} </span>%
           </p>
-          <CircleGraph :datas="circleGraphDatas" />
+          <CircleGraph :datas="bedUseGraphData" />
         </div>
       </div>
     </section>
@@ -45,14 +53,17 @@ export default {
       'patientsData',
       'getHospitalBedData',
       'bedUseRate',
+      'dischargeRate',
       'dateToJapanese',
-      'circleGraphDatas',
-      'circleGraphOptions'
+      'bedUseGraphData',
+      'dischargeRateGraphData'
     ])
   },
   async fetch({ store }) {
-    await store.dispatch('getPatientsData')
-    await store.dispatch('getHospitalBedData')
+    await Promise.all([
+      store.dispatch('getPatientsData'),
+      store.dispatch('getHospitalBedData')
+    ])
   },
   mounted() {
     this.rate = true
@@ -132,6 +143,7 @@ dt {
   @include tab {
     width: 30%;
     border-top: 1px solid #ccc;
+    text-align: left;
   }
 }
 dd {
@@ -144,16 +156,15 @@ dd {
     border-bottom: 1px solid #ccc;
   }
   @include tab {
-    border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
+    border-right: none;
+    border-left: 1px solid #ccc;
+    &:last-child {
+      border-bottom: none;
+    }
     width: 70%;
+    text-align: left;
     background: #fff;
-    box-sizing: border-box;
-  }
-}
-@media screen and (max-width: 320px) {
-  dl {
-    flex-flow: column nowrap;
   }
 }
 </style>

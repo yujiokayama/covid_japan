@@ -58,13 +58,19 @@ export const getters = {
       100
     ).toFixed(1)
   },
+  dischargeRate: (state, getters) => {
+    return (
+      (getters.patientsData.nexits / getters.patientsData.npatients) *
+      100
+    ).toFixed(1)
+  },
   dateToJapanese: (state, getters) => {
     const dt = new Date(getters.patientsData.lastUpdate)
     const dateT = ['日', '月', '火', '水', '木', '金', '土']
     const day = dateT[dt.getDay()]
     return `${getters.patientsData.lastUpdate.replace(/-/g, '/')}(${day})`
   },
-  circleGraphDatas: (state, getters) => {
+  bedUseGraphData: (state, getters) => {
     return {
       labels: ['現在感染者', '推定病床残数'],
       datasets: [
@@ -73,15 +79,27 @@ export const getters = {
             getters.patientsData.ncurrentpatients,
             getters.getHospitalBedData - getters.patientsData.ncurrentpatients
           ],
-          backgroundColor: ['#d63031', '#dfe6e9'],
+          backgroundColor: ['#d63031', '#3498db'],
           borderColor: 'transparent'
         }
       ]
     }
   },
-  circleGraphOptions: (state, getters) => {
+  bedUseGraphOptions: (state, getters) => {
     return {
       options: {}
+    }
+  },
+  dischargeRateGraphData: (state, getters) => {
+    return {
+      labels: ['累積感染者数', '累積退院者'],
+      datasets: [
+        {
+          data: [getters.patientsData.npatients, getters.patientsData.nexits],
+          backgroundColor: ['#d63031', '#3498db'],
+          borderColor: 'transparent'
+        }
+      ]
     }
   }
 }
