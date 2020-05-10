@@ -7,13 +7,13 @@
         <div>
           <dl>
             <dt>累積感染者数</dt>
-            <dd>{{ patientsData.npatients }}</dd>
+            <dd>{{ patientsData.npatients }}人</dd>
             <dt>現在感染者数</dt>
-            <dd>{{ patientsData.ncurrentpatients }}</dd>
+            <dd>{{ patientsData.ncurrentpatients }}人</dd>
             <dt>累積退院者</dt>
-            <dd>{{ patientsData.nexits }}</dd>
+            <dd>{{ patientsData.nexits }}人</dd>
             <dt>累積死者</dt>
-            <dd>{{ patientsData.ndeaths }}</dd>
+            <dd>{{ patientsData.ndeaths }}人</dd>
           </dl>
         </div>
         <div>
@@ -93,8 +93,8 @@ $pc: 960px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   // grid-auto-rows: 1fr;
-  grid-gap: 1.5rem;
-  padding: 1rem;
+  grid-gap: 1rem;
+  padding: 0rem;
   margin: 0 0 0.5rem;
   & > div {
     background: white;
@@ -117,26 +117,39 @@ $pc: 960px;
   text-align: center;
 }
 dl {
-  display: flex;
-  flex-wrap: wrap;
-  border: 1px solid #ccc;
-  border-top: none;
+  @include tab {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
 }
 dt {
-  background: #ddd;
-  width: 30%;
+  width: 100%;
   padding: 10px;
-  box-sizing: border-box;
-  border-top: 1px solid #ccc;
+  text-align: center;
+  background: #ddd;
+  @include tab {
+    width: 30%;
+    border-top: 1px solid #ccc;
+  }
 }
 dd {
+  width: 100%;
   padding: 10px;
-  margin: 0;
   border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  width: 70%;
-  background: #fff;
-  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  text-align: center;
+  &:last-child {
+    border-bottom: 1px solid #ccc;
+  }
+  @include tab {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    width: 70%;
+    background: #fff;
+    box-sizing: border-box;
+  }
 }
 @media screen and (max-width: 320px) {
   dl {
