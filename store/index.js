@@ -85,7 +85,7 @@ export const getters = {
       ]
     }
   },
-  bedUseGraphOptions: (state, getters) => {
+  bedUseGraphOptions: () => {
     return {
       options: {}
     }
@@ -103,6 +103,11 @@ export const getters = {
           borderColor: 'transparent'
         }
       ]
+    }
+  },
+  dischargeRateGraphOptions: () => {
+    return {
+      options: {}
     }
   }
 }

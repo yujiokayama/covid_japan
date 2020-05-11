@@ -22,13 +22,13 @@
           <p class="text-bed-userate">
             退院率: <span>{{ dischargeRate }} </span>%
           </p>
-          <CircleGraph :datas="dischargeRateGraphData" />
+          <circle-graph id="dischargeRate" :data="dischargeRateGraphData" />
         </div>
         <div>
           <p class="text-bed-userate">
             病床使用率: <span>{{ bedUseRate }} </span>%
           </p>
-          <CircleGraph :datas="bedUseGraphData" />
+          <circle-graph id="bedUseRate" :data="bedUseGraphData" />
         </div>
       </div>
     </section>
@@ -37,16 +37,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Circle from '~/components/Circle'
 import CircleGraph from '~/components/CircleGraph'
 
 export default {
   components: {
+    'circle-graph': Circle,
     CircleGraph
   },
   data() {
-    return {
-      rate: false
-    }
+    return {}
   },
   computed: {
     ...mapGetters([
@@ -56,7 +56,9 @@ export default {
       'dischargeRate',
       'dateToJapanese',
       'bedUseGraphData',
-      'dischargeRateGraphData'
+      'bedUseGraphOptions',
+      'dischargeRateGraphData',
+      'dischargeRateGraphOptions'
     ])
   },
   async fetch({ store }) {
@@ -64,9 +66,6 @@ export default {
       store.dispatch('getPatientsData'),
       store.dispatch('getHospitalBedData')
     ])
-  },
-  mounted() {
-    this.rate = true
   }
 }
 </script>
