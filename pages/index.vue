@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title-main">埼玉県新型コロナ情報</h1>
-    <p class="text-last-update">最終更新日 {{ dateToJapanese }}</p>
+    <p class="text-last-update">最終更新日: {{ dateToJapanese }}</p>
     <section>
       <div class="grid">
         <div>
