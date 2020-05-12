@@ -68,17 +68,8 @@ export default {
     ])
   },
   created() {},
-  mounted() {
-    setInterval(this.requestAPI, 3600000)
-  },
-  methods: {
-    async requestAPI() {
-      await Promise.all([
-        this.$store.dispatch('getPatientsData'),
-        this.$store.dispatch('getHospitalBedData')
-      ])
-    }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 
