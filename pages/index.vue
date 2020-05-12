@@ -20,13 +20,13 @@
       <div class="grid">
         <div>
           <p class="text-bed-userate">
-            退院率: <span>{{ dischargeRate }} </span>%
+            退院率 <span>{{ dischargeRate }} </span>%
           </p>
           <circle-graph id="dischargeRate" :data="dischargeRateGraphData" />
         </div>
         <div>
           <p class="text-bed-userate">
-            病床使用率: <span>{{ bedUseRate }} </span>%
+            病床使用率 <span>{{ bedUseRate }} </span>%
           </p>
           <circle-graph id="bedUseRate" :data="bedUseGraphData" />
         </div>
