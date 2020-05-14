@@ -67,22 +67,9 @@ export default {
       store.dispatch('getHospitalBedData')
     ])
   },
-  created() {
-    this.getPatientsData()
-  },
+  created() {},
   mounted() {},
-  methods: {
-    getPatientsData() {
-      this.$axios
-        .$get('https://www.stopcovid19.jp/data/covid19japan-fast.json')
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
-  }
+  methods: {}
 }
 </script>
 

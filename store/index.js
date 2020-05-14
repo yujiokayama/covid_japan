@@ -17,7 +17,7 @@ export const mutations = {
 export const actions = {
   async getPatientsData({ commit }) {
     await this.$axios
-      .$get('https://www.stopcovid19.jp/data/covid19japan-fast.json')
+      .$get('https://www.stopcovid19.jp/data/covid19japan.json')
       .then((res) => {
         commit('getPatientsData', res)
       })
@@ -39,7 +39,7 @@ export const actions = {
 
 export const getters = {
   patientsData: (state) => {
-    return state.response.patientsData.find((e) => {
+    return state.response.patientsData.area.find((e) => {
       return e.name === 'Saitama'
     })
   },
@@ -48,7 +48,11 @@ export const getters = {
       return e['自治体名'] === '埼玉県'
     })
     const AnnouncementDate = localGovernment.sort((a, b) => {
-      return new Date(b['発表日']) - new Date(a['発表日'])
+      return (
+        new Date(b['発表日']) - new Date(a['発表日']) ||
+        b['新型コロナウイルス対策感染症病床数'] -
+          a['新型コロナウイルス対策感染症病床数']
+      )
     })
     return AnnouncementDate[0]['新型コロナウイルス対策感染症病床数']
   },
@@ -65,10 +69,13 @@ export const getters = {
     ).toFixed(1)
   },
   dateToJapanese: (state, getters) => {
-    const dt = new Date(getters.patientsData.lastUpdate)
+    const dt = new Date(state.response.patientsData.lastUpdate)
     const dateT = ['日', '月', '火', '水', '木', '金', '土']
     const day = dateT[dt.getDay()]
-    return `${getters.patientsData.lastUpdate.replace(/-/g, '/')}(${day})`
+    return `${state.response.patientsData.lastUpdate.replace(
+      /-/g,
+      '/'
+    )}(${day})`
   },
   bedUseGraphData: (state, getters) => {
     return {
