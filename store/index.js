@@ -54,11 +54,20 @@ export const getters = {
           a['新型コロナウイルス対策感染症病床数']
       )
     })
-    return AnnouncementDate[0]['新型コロナウイルス対策感染症病床数']
+    return AnnouncementDate[0]
+  },
+  numberOfBeds: (state, getters) => {
+    return getters.getHospitalBedData['新型コロナウイルス対策感染症病床数']
+  },
+  remarkOfBedsNumber: (state, getters) => {
+    return getters.getHospitalBedData['備考']
+  },
+  sourceOfBedsNumber: (state, getters) => {
+    return getters.getHospitalBedData['出典']
   },
   bedUseRate: (state, getters) => {
     return (
-      (getters.patientsData.ncurrentpatients / getters.getHospitalBedData) *
+      (getters.patientsData.ncurrentpatients / getters.numberOfBeds) *
       100
     ).toFixed(1)
   },
@@ -70,8 +79,8 @@ export const getters = {
   },
   dateToJapanese: (state, getters) => {
     const dt = new Date(state.response.patientsData.lastUpdate)
-    const dateT = ['日', '月', '火', '水', '木', '金', '土']
-    const day = dateT[dt.getDay()]
+    const weakData = ['日', '月', '火', '水', '木', '金', '土']
+    const day = weakData[dt.getDay()]
     return `${state.response.patientsData.lastUpdate.replace(
       /-/g,
       '/'
@@ -84,7 +93,7 @@ export const getters = {
         {
           data: [
             getters.patientsData.ncurrentpatients,
-            getters.getHospitalBedData - getters.patientsData.ncurrentpatients
+            getters.numberOfBeds - getters.patientsData.ncurrentpatients
           ],
           backgroundColor: ['#d63031', '#3498db'],
           borderColor: 'transparent'

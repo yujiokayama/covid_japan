@@ -29,6 +29,15 @@
             病床使用率: <span>{{ bedUseRate }} </span>%
           </p>
           <circle-graph id="bedUseRate" :data="bedUseGraphData" />
+          <p v-if="remarkOfBedsNumber" class="text-bed-remark">
+            備考: {{ remarkOfBedsNumber }}
+          </p>
+          <p v-if="sourceOfBedsNumber" class="text-bed-sorce">
+            出典:
+            <a :href="sourceOfBedsNumber" target="_blank"
+              >新型コロナウイルス感染症入院患者受入病床数等</a
+            >
+          </p>
         </div>
       </div>
     </section>
@@ -51,7 +60,9 @@ export default {
   computed: {
     ...mapGetters([
       'patientsData',
-      'getHospitalBedData',
+      'numberOfBeds',
+      'remarkOfBedsNumber',
+      'sourceOfBedsNumber',
       'bedUseRate',
       'dischargeRate',
       'dateToJapanese',
@@ -121,14 +132,25 @@ $pc: 960px;
   text-align: center;
   font-weight: normal;
 }
-.text-last-update {
-  text-align: center;
+.text {
+  &-last-update {
+    text-align: center;
+  }
+  &-bed {
+    &-userate {
+      margin: 0 0 10px 0;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    &-remark,
+    &-sorce {
+      margin: 10px 0 0 0;
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
 }
-.text-bed-userate {
-  margin: 0 0 10px 0;
-  font-size: 1.4rem;
-  text-align: center;
-}
+
 dl {
   @include tab {
     display: flex;
