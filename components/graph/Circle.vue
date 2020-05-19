@@ -28,48 +28,6 @@ export default {
     const ctx = document.getElementById(this.id)
 
     /**
-     * チャートにテキストを表示する
-     */
-    const dataLabelPlugin = {
-      afterDatasetsDraw(chart, easing) {
-        const ctx = chart.ctx
-        chart.data.datasets.forEach(function(dataset, i) {
-          const meta = chart.getDatasetMeta(i)
-          if (!meta.hidden) {
-            meta.data.forEach(function(element, index) {
-              ctx.fillStyle = 'rgb(255, 255, 255)'
-
-              const fontSize = 16
-              const fontStyle = 'normal'
-              const fontFamily = 'Helvetica Neue'
-              ctx.font = Chart.helpers.fontString(
-                fontSize,
-                fontStyle,
-                fontFamily
-              )
-
-              const dataString =
-                chart.data.labels[index] +
-                ' : ' +
-                dataset.data[index].toString()
-
-              ctx.textAlign = 'center'
-              ctx.textBaseline = 'middle'
-
-              const padding = 5
-              const position = element.tooltipPosition()
-              ctx.fillText(
-                dataString,
-                position.x,
-                position.y - fontSize / 2 - padding
-              )
-            })
-          }
-        })
-      }
-    }
-
-    /**
      * ツールチップを常時表示
      */
     Chart.pluginService.register({
@@ -127,7 +85,7 @@ export default {
       data: this.data,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        // maintainAspectRatio: true,
         showAllTooltips: true,
         legend: {
           position: 'top',

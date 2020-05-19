@@ -47,10 +47,9 @@ export default {
   }
 
   &-content {
-    // width: 100vw;
-    height: 100vh;
-    max-height: 640px;
-    overflow-y: auto;
+    min-width: 80vw;
+    max-height: 80vh;
+    // overflow-y: auto;
   }
 }
 

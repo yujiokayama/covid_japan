@@ -23,11 +23,17 @@ export default {
   /*
    ** Global CSS
    */
-  css: [{ src: '~/assets/sass/index.scss', lang: 'scss' }],
+  css: [
+    '@mdi/font/css/materialdesignicons.css',
+    { src: '~/assets/sass/index.scss', lang: 'scss' }
+  ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/storage.js', ssr: false }],
+  plugins: [
+    '~/plugins/polyfill.js',
+    { src: '~/plugins/storage.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

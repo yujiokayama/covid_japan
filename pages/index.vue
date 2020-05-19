@@ -3,13 +3,12 @@
     <section>
       <h1 class="title-main">日本COVID-19情報</h1>
       <p class="text-last-update">最終更新日: {{ lastUpdate }}</p>
-      <div class="grid grid--gutters grid--cols-6">
+      <div class="css-grid">
         <div
           :id="patientsData.name"
           v-for="patientsData in patientsDataAll"
           :key="patientsData.name_jp"
           :class="[
-            'grid-cell',
             'list-patients-data',
             infectionStatus(patientsData.npatients)
           ]"
@@ -63,7 +62,7 @@ export default {
     ...mapActions('modules/modal', ['modalOpen']),
     setDataByPrefecture(e) {
       this.modalOpen('Modal')
-      this.getDataByPrefecture(e.target.closest('div').id)
+      this.getDataByPrefecture(this.$closest(e.target, 'div').id)
     }
   }
 }

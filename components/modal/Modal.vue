@@ -1,13 +1,9 @@
 <template>
-  <div>
+  <div class="modal">
     <section>
-      <font-awesome-icon
-        @click="modalClose"
-        icon="times"
-        style="font-size: 20px"
-      />
+      <i @click="modalClose" class="modal-close mdi mdi-close" />
       <h1 class="title-main">{{ selectedPrefData.name_jp }}</h1>
-      <div class="grid grid-300">
+      <div class="grid">
         <div>
           <p class="text-bed-userate">
             病床使用率: <span>{{ bedUseRate }} </span>%
@@ -23,20 +19,20 @@
             >
           </p>
         </div>
-      </div>
-      <div class="table-data">
-        <dl>
-          <dt>累積感染者数</dt>
-          <dd>{{ selectedPrefData.npatients }}人</dd>
-          <dt>現在感染者数</dt>
-          <dd>{{ selectedPrefData.ncurrentpatients }}人</dd>
-          <dt>累積退院者</dt>
-          <dd>{{ selectedPrefData.nexits }}人</dd>
-          <dt>累積死者</dt>
-          <dd>{{ selectedPrefData.ndeaths }}人</dd>
-          <dt>推定病床数</dt>
-          <dd>{{ numberOfBeds }}床</dd>
-        </dl>
+        <div>
+          <dl>
+            <dt>累積感染者数</dt>
+            <dd>{{ selectedPrefData.npatients }}人</dd>
+            <dt>現在感染者数</dt>
+            <dd>{{ selectedPrefData.ncurrentpatients }}人</dd>
+            <dt>累積退院者</dt>
+            <dd>{{ selectedPrefData.nexits }}人</dd>
+            <dt>累積死者</dt>
+            <dd>{{ selectedPrefData.ndeaths }}人</dd>
+            <dt>推定病床数</dt>
+            <dd>{{ numberOfBeds }}床</dd>
+          </dl>
+        </div>
       </div>
     </section>
   </div>
@@ -80,4 +76,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal {
+  position: relative;
+  &-close {
+    position: absolute;
+    right: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+</style>
