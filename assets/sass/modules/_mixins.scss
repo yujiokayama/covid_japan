@@ -1,0 +1,20 @@
+/**
+  @include tab {
+    property: value;
+  }
+*/
+@mixin tab {
+  @media (min-width: ($tab)) {
+    @content;
+  }
+}
+/**
+  @include pc {
+    property: value;
+  }
+*/
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}

@@ -23,11 +23,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [{ src: '~/assets/sass/index.scss', lang: 'scss' }],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/storage.js', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -39,11 +39,27 @@ export default {
    ** Nuxt.js modules
    */
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/style-resources', ['nuxt-webfontloader']],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    'nuxt-fontawesome',
+    ['nuxt-webfontloader']
+  ],
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
   webfontloader: {
     google: {
       families: ['Noto+Sans+JP:400,500,700,900']
     }
+  },
+  styleResources: {
+    scss: ['~/assets/sass/modules/_variables.scss']
   },
   /*
    ** Axios module configuration

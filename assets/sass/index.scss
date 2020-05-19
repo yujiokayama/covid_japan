@@ -1,0 +1,74 @@
+@import './modules/mixins';
+@import './modules/layout';
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 1em;
+  @include tab {
+    padding: 0 1.8rem;
+  }
+  @include pc {
+    max-width: 1240px;
+  }
+}
+
+.title {
+  &-main {
+    margin: 10px 0;
+    text-align: center;
+    font-weight: normal;
+    font-size: 2rem;
+  }
+  &-sub {
+    margin: 10px 0;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: normal;
+  }
+}
+.text {
+  &-last-update {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+  &-bed {
+    &-userate {
+      margin: 0 0 10px 0;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    &-remark,
+    &-sorce {
+      margin: 10px 0 0 0;
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+}
+
+.list-patients-data {
+  border: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+  dl {
+    padding: 1rem;
+  }
+}
+
+.infection-status {
+  &-fine {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  &-caution-low {
+    background-color: rgba(173, 35, 47, 0.1);
+  }
+  &-caution-high {
+    background-color: rgba(173, 35, 47, 0.4);
+  }
+  &-danger {
+    color: white;
+    background-color: rgba(173, 35, 47, 0.8);
+  }
+}
