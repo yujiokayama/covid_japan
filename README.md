@@ -1,6 +1,6 @@
-# covid_saitama
+# covid_japan
 
-> 埼玉県の新型コロナ情報取得
+> 新型コロナ情報取得
 
 ## Build Setup
 
