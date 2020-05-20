@@ -48,7 +48,7 @@ export default {
   }
 
   &-content {
-    width: 80vw;
+    width: 96vw;
     @include tab {
       width: 60vw;
     }
