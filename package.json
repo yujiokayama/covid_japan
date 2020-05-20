@@ -1,7 +1,7 @@
 {
-  "name": "covid_saitama",
+  "name": "covid_japan",
   "version": "1.0.0",
-  "description": "埼玉県の新型コロナ情報取得",
+  "description": "日本の新型コロナ情報取得",
   "author": "YUJI OKAYAMA",
   "private": true,
   "scripts": {
