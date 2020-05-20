@@ -9,7 +9,7 @@
             病床使用率: <span>{{ bedUseRate }} </span>%
           </p>
           <div class="graph-container">
-            <circle-graph id="bedUseRate" :data="bedUseGraphData" />
+            <CircleGraph id="bedUseRate" :data="bedUseGraphData" />
           </div>
         </div>
         <div class="patients-data">
@@ -25,28 +25,28 @@
             <dt>推定病床数</dt>
             <dd>{{ numberOfBeds }}床</dd>
           </dl>
-          <p v-if="remarkOfBedsNumber" class="text-bed-remark">
-            備考: {{ remarkOfBedsNumber }}
-          </p>
-          <p v-if="sourceOfBedsNumber" class="text-bed-sorce">
-            出典:
-            <a :href="sourceOfBedsNumber" target="_blank"
-              >新型コロナウイルス感染症入院患者受入病床数等</a
-            >
-          </p>
         </div>
       </div>
+      <p v-if="remarkOfBedsNumber" class="text-bed-remark">
+        備考: {{ remarkOfBedsNumber }}
+      </p>
+      <p v-if="sourceOfBedsNumber" class="text-bed-sorce">
+        出典:
+        <a :href="sourceOfBedsNumber" target="_blank"
+          >新型コロナウイルス感染症入院患者受入病床数等</a
+        >
+      </p>
     </section>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Circle from '~/components/graph/Circle'
+import CircleGraph from '~/components/graph/CircleGraph'
 
 export default {
   components: {
-    'circle-graph': Circle
+    CircleGraph
   },
   data() {
     return {}
