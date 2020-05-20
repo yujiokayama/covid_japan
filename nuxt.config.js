@@ -65,7 +65,10 @@ export default {
     }
   },
   styleResources: {
-    scss: ['~/assets/sass/modules/_variables.scss']
+    scss: [
+      '~/assets/sass/modules/_variables.scss',
+      '~/assets/sass/modules/_mixins.scss'
+    ]
   },
   /*
    ** Axios module configuration
@@ -80,6 +83,11 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    postcss: {
+      preset: {
+        autoprefixer: { grid: 'autoplace' }
+      }
+    }
   }
 }

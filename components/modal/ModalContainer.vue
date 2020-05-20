@@ -44,12 +44,16 @@ export default {
   &-window {
     border-radius: 10px;
     background: #fff;
+    overflow: hidden;
   }
 
   &-content {
-    min-width: 80vw;
+    width: 80vw;
+    @include tab {
+      width: 60vw;
+    }
     max-height: 80vh;
-    // overflow-y: auto;
+    overflow-y: auto;
   }
 }
 

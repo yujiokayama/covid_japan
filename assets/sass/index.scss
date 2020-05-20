@@ -48,6 +48,49 @@
   }
 }
 
+.patients-data {
+  dl {
+    @include tab {
+      display: flex;
+      flex-wrap: wrap;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+  }
+  dt {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: #ddd;
+    @include tab {
+      width: 30%;
+      border-top: 1px solid #ccc;
+      text-align: left;
+    }
+  }
+  dd {
+    width: 100%;
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-align: center;
+    &:last-child {
+      border-bottom: 1px solid #ccc;
+    }
+    @include tab {
+      border-top: 1px solid #ccc;
+      border-right: none;
+      border-left: 1px solid #ccc;
+      &:last-child {
+        border-bottom: none;
+      }
+      width: 70%;
+      text-align: left;
+      background: #fff;
+    }
+  }
+}
+
 .list-patients-data {
   border: 1px solid black;
   text-align: center;

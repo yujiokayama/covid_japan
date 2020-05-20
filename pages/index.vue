@@ -3,7 +3,7 @@
     <section>
       <h1 class="title-main">日本COVID-19情報</h1>
       <p class="text-last-update">最終更新日: {{ lastUpdate }}</p>
-      <div class="css-grid">
+      <div class="grid grid-120">
         <div
           :id="patientsData.name"
           v-for="patientsData in patientsDataAll"

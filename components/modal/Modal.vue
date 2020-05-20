@@ -3,23 +3,16 @@
     <section>
       <i @click="modalClose" class="modal-close mdi mdi-close" />
       <h1 class="title-main">{{ selectedPrefData.name_jp }}</h1>
-      <div class="grid">
+      <div class="grid grid-320">
         <div>
           <p class="text-bed-userate">
             病床使用率: <span>{{ bedUseRate }} </span>%
           </p>
-          <circle-graph id="bedUseRate" :data="bedUseGraphData" />
-          <p v-if="remarkOfBedsNumber" class="text-bed-remark">
-            備考: {{ remarkOfBedsNumber }}
-          </p>
-          <p v-if="sourceOfBedsNumber" class="text-bed-sorce">
-            出典:
-            <a :href="sourceOfBedsNumber" target="_blank"
-              >新型コロナウイルス感染症入院患者受入病床数等</a
-            >
-          </p>
+          <div class="graph-container">
+            <circle-graph id="bedUseRate" :data="bedUseGraphData" />
+          </div>
         </div>
-        <div>
+        <div class="patients-data">
           <dl>
             <dt>累積感染者数</dt>
             <dd>{{ selectedPrefData.npatients }}人</dd>
@@ -32,6 +25,15 @@
             <dt>推定病床数</dt>
             <dd>{{ numberOfBeds }}床</dd>
           </dl>
+          <p v-if="remarkOfBedsNumber" class="text-bed-remark">
+            備考: {{ remarkOfBedsNumber }}
+          </p>
+          <p v-if="sourceOfBedsNumber" class="text-bed-sorce">
+            出典:
+            <a :href="sourceOfBedsNumber" target="_blank"
+              >新型コロナウイルス感染症入院患者受入病床数等</a
+            >
+          </p>
         </div>
       </div>
     </section>
@@ -84,6 +86,12 @@ export default {
     right: 10px;
     font-size: 2rem;
     cursor: pointer;
+  }
+}
+.graph {
+  &-container {
+    max-width: 80%;
+    margin: 0 auto;
   }
 }
 </style>
