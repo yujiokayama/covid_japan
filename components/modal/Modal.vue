@@ -15,15 +15,15 @@
         <div class="patients-data">
           <dl>
             <dt>累積感染者数</dt>
-            <dd>{{ selectedPrefData.npatients }}人</dd>
+            <dd>{{ commaSeparated(selectedPrefData.npatients) }}人</dd>
             <dt>現在感染者数</dt>
-            <dd>{{ selectedPrefData.ncurrentpatients }}人</dd>
+            <dd>{{ commaSeparated(selectedPrefData.ncurrentpatients) }}人</dd>
             <dt>累積退院者</dt>
-            <dd>{{ selectedPrefData.nexits }}人</dd>
+            <dd>{{ commaSeparated(selectedPrefData.nexits) }}人</dd>
             <dt>累積死者</dt>
-            <dd>{{ selectedPrefData.ndeaths }}人</dd>
+            <dd>{{ commaSeparated(selectedPrefData.ndeaths) }}人</dd>
             <dt>推定病床数</dt>
-            <dd>{{ numberOfBeds }}床</dd>
+            <dd>{{ commaSeparated(numberOfBeds) }}床</dd>
           </dl>
         </div>
       </div>
@@ -53,6 +53,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'commaSeparated',
       'bedUseRate',
       'dischargeRate',
       'bedUseGraphData',

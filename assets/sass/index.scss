@@ -19,7 +19,7 @@
     margin: 10px 0;
     text-align: center;
     font-weight: normal;
-    font-size: 2rem;
+    font-size: 3rem;
   }
   &-sub {
     margin: 10px 0;
@@ -45,6 +45,27 @@
       font-size: 1rem;
       text-align: center;
     }
+  }
+}
+
+.total-infomation {
+  dl {
+    font-size: 1.6rem;
+  }
+  dt,
+  dd {
+    border: 5px solid black;
+    padding: 1rem;
+    text-align: center;
+  }
+  dt {
+    border-bottom: none;
+    color: white;
+    background-color: black;
+  }
+  dd {
+    border-top: none;
+    font-weight: bold;
   }
 }
 
@@ -92,7 +113,6 @@
 }
 
 .list-patients-data {
-  border: 1px solid black;
   text-align: center;
   cursor: pointer;
   dl {
@@ -102,16 +122,23 @@
 
 .infection-status {
   &-fine {
-    background-color: rgba(255, 255, 255, 0);
+    border: 5px solid rgba(52, 152, 219, 1);
+    color: white;
+    background-color: rgba(52, 152, 219, 1);
   }
   &-caution-low {
+    border: 5px solid rgba(173, 35, 47, 0.1);
+    color: rgba(173, 35, 47, 1);
     background-color: rgba(173, 35, 47, 0.1);
   }
   &-caution-high {
+    border: 5px solid rgba(173, 35, 47, 0.4);
+    color: rgba(173, 35, 47, 1);
     background-color: rgba(173, 35, 47, 0.4);
   }
   &-danger {
+    border: 5px solid rgba(173, 35, 47, 0.8);
     color: white;
-    background-color: rgba(173, 35, 47, 0.8);
+    background-color: rgba(173, 35, 47, 1);
   }
 }

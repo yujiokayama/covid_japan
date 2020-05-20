@@ -7,7 +7,7 @@ export const actions = {}
 export const getters = {
   /**
    * 最終更新日
-   * @return {Saring}
+   * @return {String}
    */
   lastUpdate: (state, getters, rootState, rootGetters) => {
     const dt = new Date(rootGetters['modules/patientsdata/lastUpdate'])
@@ -17,6 +17,13 @@ export const getters = {
       /-/g,
       '/'
     )}(${day})`
+  },
+  /**
+   * カンマ区切り
+   * @return {String}
+   */
+  commaSeparated: () => (str) => {
+    return Number(str).toLocaleString()
   },
   /**
    * 病床使用率

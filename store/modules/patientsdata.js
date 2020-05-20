@@ -1,22 +1,18 @@
 export const state = () => ({
   /**
-   * @val {String} lastUpdate
-   * @val {Array} area
+   * @val {Object} patientsData
+   * @val {Array} selectedPrefData
    */
-  patientsData: {
-    lastUpdate: '',
-    area: [],
-    selectedPrefData: []
-  }
+  patientsData: {},
+  selectedPrefData: []
 })
 
 export const mutations = {
   getPatientsData(state, payload) {
-    state.patientsData.lastUpdate = payload.lastUpdate
-    state.patientsData.area = payload.area
+    state.patientsData = payload
   },
   getDataByPrefecture(state, payload) {
-    state.patientsData.selectedPrefData = payload
+    state.selectedPrefData = payload
   }
 }
 
@@ -32,7 +28,7 @@ export const actions = {
       })
   },
   getDataByPrefecture({ commit, getters }, pref) {
-    const prefData = getters.patientsDataAll.find((e) => {
+    const prefData = getters.patientsDataArea.find((e) => {
       return e.name === pref
     })
     commit('getDataByPrefecture', prefData)
@@ -41,22 +37,40 @@ export const actions = {
 
 export const getters = {
   /**
-   * 感染者情報
+   * 現在患者数
    */
-  patientsDataAll: (state) => {
-    return state.patientsData.area
+  totalCurrentPatients: (state) => {
+    return state.patientsData.ncurrentpatients
+  },
+  /**
+   * 累積退院者
+   */
+  cumulativeDischarge: (state) => {
+    return state.patientsData.nexits
+  },
+  /**
+   * 累積死亡者
+   */
+  cumulativeDeath: (state) => {
+    return state.patientsData.ndeaths
   },
   /**
    * 最終更新日
    */
-  lastUpdate: (state, getters) => {
+  lastUpdate: (state) => {
     return state.patientsData.lastUpdate
+  },
+  /**
+   * 都道府県別のコロナ情報
+   */
+  patientsDataArea: (state) => {
+    return state.patientsData.area
   },
   /**
    * 選択した都道府県のデータ
    */
   selectedPrefData: (state) => {
-    return state.patientsData.selectedPrefData
+    return state.selectedPrefData
   },
   /**
    * 累積感染者数
@@ -83,9 +97,9 @@ export const getters = {
   infectionStatus: () => (patients) => {
     return patients === 0
       ? { 'infection-status-fine': true }
-      : patients >= 0 && patients <= 499
+      : patients > 0 && patients <= 100
       ? { 'infection-status-caution-low': true }
-      : patients >= 500 && patients <= 999
+      : patients >= 101 && patients <= 999
       ? { 'infection-status-caution-high': true }
       : patients >= 1000
       ? { 'infection-status-danger': true }

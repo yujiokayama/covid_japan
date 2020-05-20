@@ -3,21 +3,43 @@
     <section>
       <h1 class="title-main">日本COVID-19情報</h1>
       <p class="text-last-update">最終更新日: {{ lastUpdate }}</p>
+      <div class="grid grid-320 total-infomation">
+        <div>
+          <dl>
+            <dt>累積退院者</dt>
+            <dd>{{ commaSeparated(cumulativeDischarge) }}人</dd>
+          </dl>
+        </div>
+        <div>
+          <dl>
+            <dt>現在患者数</dt>
+            <dd>{{ commaSeparated(totalCurrentPatients) }}人</dd>
+          </dl>
+        </div>
+        <div>
+          <dl>
+            <dt>累積死亡者</dt>
+            <dd>{{ commaSeparated(cumulativeDeath) }}人</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+    <section>
       <div class="grid grid-120">
         <div
           :id="patientsData.name"
-          v-for="patientsData in patientsDataAll"
+          v-for="patientsData in patientsDataArea"
           :key="patientsData.name_jp"
           :class="[
             'list-patients-data',
-            infectionStatus(patientsData.npatients)
+            infectionStatus(patientsData.ncurrentpatients)
           ]"
         >
           <dl @click="setDataByPrefecture">
             <dt class="title-sub">
               {{ patientsData.name_jp }}
             </dt>
-            <dd>{{ patientsData.npatients }}人</dd>
+            <dd>{{ commaSeparated(patientsData.ncurrentpatients) }}人</dd>
           </dl>
         </div>
       </div>
@@ -42,9 +64,12 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['lastUpdate']),
+    ...mapGetters(['lastUpdate', 'commaSeparated']),
     ...mapGetters('modules/patientsdata/', [
-      'patientsDataAll',
+      'totalCurrentPatients',
+      'cumulativeDischarge',
+      'cumulativeDeath',
+      'patientsDataArea',
       'infectionStatus'
     ]),
     ...mapGetters('modules/modal', ['currentModal', 'modalFlg'])
