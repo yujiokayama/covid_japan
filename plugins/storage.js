@@ -1,9 +1,8 @@
-import createPersistedState from 'vuex-persistedstate'
-
-export default ({ store }) => {
-  window.onNuxtReady(() => {
-    createPersistedState({
-      paths: ['modules.hospitalbed.patientsData.lastUpdate']
-    })(store)
+export default ({ app }, inject) => {
+  inject('setStorage', (key, state) =>
+    localStorage.setItem(key, JSON.stringify(state))
+  )
+  inject('getStorage', (key) => {
+    return localStorage.getItem(key)
   })
 }

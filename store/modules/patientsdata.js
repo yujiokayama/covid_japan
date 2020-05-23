@@ -1,10 +1,10 @@
 export const state = () => ({
   /**
-   * @val {Object} patientsData
-   * @val {Array} selectedPrefData
+   * @val {Array} patientsData
+   * @val {Object} selectedPrefData
    */
-  patientsData: {},
-  selectedPrefData: []
+  patientsData: [],
+  selectedPrefData: {}
 })
 
 export const mutations = {
@@ -27,11 +27,29 @@ export const actions = {
         console.log(err)
       })
   },
+  storagelastUpdate({ getters }) {
+    if (!new RegExp(getters.lastUpdate).test(this.$getStorage('lastUpdate'))) {
+      this.$setStorage('lastUpdate', getters.lastUpdate)
+    }
+  },
+  storagePatientsDataArea({ getters }) {
+    if (
+      !new RegExp(getters.patientsDataArea).test(
+        this.$getStorage('patientsDataArea')
+      )
+    ) {
+      this.$setStorage('patientsDataArea', getters.patientsDataArea)
+    }
+  },
   getDataByPrefecture({ commit, getters }, pref) {
     const prefData = getters.patientsDataArea.find((e) => {
       return e.name === pref
     })
     commit('getDataByPrefecture', prefData)
+  },
+  setDataByPrefecture({ commit, dispatch }, event) {
+    dispatch('modules/modal/modalOpen', 'Modal', { root: true })
+    dispatch('getDataByPrefecture', this.$closest(event.target, 'div').id)
   }
 }
 

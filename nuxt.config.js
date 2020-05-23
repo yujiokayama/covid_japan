@@ -30,10 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/polyfill.js',
-    { src: '~/plugins/storage.js', ssr: false }
-  ],
+  plugins: ['~/plugins/polyfill.js', '~/plugins/storage.js'],
   /*
    ** Nuxt.js dev-modules
    */

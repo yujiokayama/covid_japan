@@ -74,21 +74,25 @@ export default {
     ]),
     ...mapGetters('modules/modal', ['currentModal', 'modalFlg'])
   },
+  asyncData() {},
   async fetch({ store }) {
     await Promise.all([
       store.dispatch('modules/patientsdata/getPatientsData'),
       store.dispatch('modules/hospitalbed/getHospitalBedData')
     ])
   },
-  created() {},
-  mounted() {},
+  mounted() {
+    this.storagelastUpdate()
+    this.storagePatientsDataArea()
+  },
   methods: {
-    ...mapActions('modules/patientsdata', ['getDataByPrefecture']),
-    ...mapActions('modules/modal', ['modalOpen']),
-    setDataByPrefecture(e) {
-      this.modalOpen('Modal')
-      this.getDataByPrefecture(this.$closest(e.target, 'div').id)
-    }
+    ...mapActions('modules/patientsdata', [
+      'storagelastUpdate',
+      'storagePatientsDataArea',
+      'setDataByPrefecture',
+      'getDataByPrefecture'
+    ]),
+    ...mapActions('modules/modal', ['modalOpen'])
   }
 }
 </script>
