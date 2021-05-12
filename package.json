@@ -18,7 +18,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@mdi/font": "^5.2.45",
     "@nuxtjs/axios": "^5.3.6",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "d3": "^5.16.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
