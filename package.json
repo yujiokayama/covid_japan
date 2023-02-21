@@ -34,8 +34,8 @@
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.0.1",
-    "node-sass": "^4.14.1",
     "prettier": "^1.16.4",
+    "sass": "^1.58.3",
     "sass-loader": "^8.0.2",
     "vercel-builder": "^0.0.2"
   }
