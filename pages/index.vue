@@ -103,16 +103,15 @@ export default {
     init() {
       Promise.all([this.getPatientsData(), this.getHospitalBedData()]).then(
         () => {
-          this.handleGetLastUpdate()
+          this.setLastUpdate()
           this.isLoading = false
         }
       )
     },
     /**
-     * 最終更新日を取得
-     * @return {string} 最終更新日
+     * 最終更新日をセットする
      */
-    handleGetLastUpdate() {
+    setLastUpdate() {
       const lastUpdate = this.getLastUpdate
       const dt = new Date(lastUpdate)
       const weakData = ['日', '月', '火', '水', '木', '金', '土']
