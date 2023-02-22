@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div v-if="!isLoading" class="container">
     <section>
       <h1 class="title-main">日本COVID-19情報</h1>
-      <p class="text-last-update">最終更新日: {{ lastUpdate }}</p>
+      <p class="text-last-update">最終更新日: {{ update }}</p>
       <div class="grid grid-320 total-infomation">
         <div>
           <dl>
@@ -61,38 +61,65 @@ export default {
     Modal
   },
   data() {
-    return {}
+    return {
+      update: '',
+      isLoading: true
+    }
   },
   computed: {
-    ...mapGetters(['lastUpdate', 'commaSeparated']),
     ...mapGetters('modules/patientsdata/', [
       'totalCurrentPatients',
       'cumulativeDischarge',
       'cumulativeDeath',
       'patientsDataArea',
-      'infectionStatus'
+      'infectionStatus',
+      'getLastUpdate'
     ]),
-    ...mapGetters('modules/modal', ['currentModal', 'modalFlg'])
+    ...mapGetters('modules/modal', ['currentModal', 'modalFlg']),
+    /**
+     * カンマ区切り
+     * @return {string} カンマ区切り
+     */
+    commaSeparated() {
+      return (str) => {
+        return Number(str).toLocaleString()
+      }
+    }
   },
-  asyncData() {},
-  async fetch({ store }) {
-    await Promise.all([
-      store.dispatch('modules/patientsdata/getPatientsData'),
-      store.dispatch('modules/hospitalbed/getHospitalBedData')
-    ])
+  created() {
+    this.init()
   },
-  mounted() {
-    this.storagelastUpdate()
-    this.storagePatientsDataArea()
-  },
+  mounted() {},
   methods: {
     ...mapActions('modules/patientsdata', [
-      'storagelastUpdate',
+      'storageLastUpdate',
       'storagePatientsDataArea',
       'setDataByPrefecture',
-      'getDataByPrefecture'
+      'getDataByPrefecture',
+      'getPatientsData'
     ]),
-    ...mapActions('modules/modal', ['modalOpen'])
+    ...mapActions('modules/hospitalbed', ['getHospitalBedData']),
+    ...mapActions('modules/modal', ['modalOpen']),
+    init() {
+      Promise.all([this.getPatientsData(), this.getHospitalBedData()]).then(
+        () => {
+          this.handleGetLastUpdate()
+          this.isLoading = false
+        }
+      )
+    },
+    /**
+     * 最終更新日を取得
+     * @return {string} 最終更新日
+     */
+    handleGetLastUpdate() {
+      const lastUpdate = this.getLastUpdate
+      const dt = new Date(lastUpdate)
+      const weakData = ['日', '月', '火', '水', '木', '金', '土']
+      const day = weakData[dt.getDay()]
+
+      this.update = `${lastUpdate.replace(/-/g, '/')}(${day})`
+    }
   }
 }
 </script>

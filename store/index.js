@@ -6,26 +6,6 @@ export const actions = {}
 
 export const getters = {
   /**
-   * 最終更新日
-   * @return {String}
-   */
-  lastUpdate: (state, getters, rootState, rootGetters) => {
-    const dt = new Date(rootGetters['modules/patientsdata/lastUpdate'])
-    const weakData = ['日', '月', '火', '水', '木', '金', '土']
-    const day = weakData[dt.getDay()]
-    return `${rootGetters['modules/patientsdata/lastUpdate'].replace(
-      /-/g,
-      '/'
-    )}(${day})`
-  },
-  /**
-   * カンマ区切り
-   * @return {String}
-   */
-  commaSeparated: () => (str) => {
-    return Number(str).toLocaleString()
-  },
-  /**
    * 病床使用率
    * @return {Number}
    */

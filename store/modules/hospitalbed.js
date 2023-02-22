@@ -38,6 +38,7 @@ export const getters = {
         remark: e['備考']
       }
     })
+
     return hospitalBed
   },
   /**

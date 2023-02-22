@@ -1,8 +1,4 @@
 export const state = () => ({
-  /**
-   * @val {Array} patientsData
-   * @val {Object} selectedPrefData
-   */
   patientsData: [],
   selectedPrefData: {}
 })
@@ -27,7 +23,7 @@ export const actions = {
         console.log(err)
       })
   },
-  storagelastUpdate({ getters }) {
+  storageLastUpdate({ getters }) {
     if (!new RegExp(getters.lastUpdate).test(this.$getStorage('lastUpdate'))) {
       this.$setStorage('lastUpdate', getters.lastUpdate)
     }
@@ -75,7 +71,7 @@ export const getters = {
   /**
    * 最終更新日
    */
-  lastUpdate: (state) => {
+  getLastUpdate: (state) => {
     return state.patientsData.lastUpdate
   },
   /**
