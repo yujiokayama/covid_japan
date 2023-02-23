@@ -69,7 +69,16 @@ export default {
       'numberOfBeds',
       'remarkOfBedsNumber',
       'sourceOfBedsNumber'
-    ])
+    ]),
+    /**
+     * カンマ区切り
+     * @return {string} カンマ区切り
+     */
+    commaSeparated() {
+      return (str) => {
+        return Number(str).toLocaleString()
+      }
+    }
   },
   created() {},
   mounted() {},
